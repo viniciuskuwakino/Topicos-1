@@ -14,7 +14,7 @@ def num_acidentes(meses):
 def acidentes_dia_mes(df):
   dia_mes = []
 
-  for i in df['data_boletim']:
+  for i in df['DATA_BOLETIM']:
     a = i.split('/')
     dia_mes.append(a[0] + '/' + a[1])
 
