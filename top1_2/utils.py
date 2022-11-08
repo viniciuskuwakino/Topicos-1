@@ -1,5 +1,6 @@
 import numpy as np
 import collections
+from datetime import datetime
 
 def num_acidentes(meses):
   acidentes = []
@@ -59,3 +60,33 @@ def get_x_y(meses):
   
   return x, y
   
+def get_horario(horas):
+
+  horario = {'MADRUGADA': 0, 'MANHA': 0, 'TARDE': 0, 'NOITE': 0}
+
+  madru_ini = datetime.strptime('00:00', '%H:%M').time()
+  madru_fim = datetime.strptime('05:59', '%H:%M').time()
+  manha_ini = datetime.strptime('06:00', '%H:%M').time()
+  manha_fim = datetime.strptime('11:59', '%H:%M').time()
+  tarde_ini = datetime.strptime('12:00', '%H:%M').time()
+  tarde_fim = datetime.strptime('17:59', '%H:%M').time()
+  noite_ini = datetime.strptime('18:00', '%H:%M').time()
+  noite_fim = datetime.strptime('23:59', '%H:%M').time()
+
+  for i in horas:
+    time_object = datetime.strptime(i, '%H:%M').time()
+    
+    if time_object > madru_ini and time_object < madru_fim :
+      horario['MADRUGADA'] += 1
+
+    if time_object > manha_ini and time_object < manha_fim :
+      horario['MANHA'] += 1
+
+    if time_object > tarde_ini and time_object < tarde_fim :
+      horario['TARDE'] += 1
+
+    if time_object > noite_ini and time_object < noite_fim :
+      horario['NOITE'] += 1
+
+
+  return horario  
