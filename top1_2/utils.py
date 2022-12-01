@@ -126,18 +126,25 @@ def get_localizacao(dado):
   localizacao = {}
 
   for i in dado:
+    if len(localizacao) == 0:
+      if len(i) == 1:
+        localizacao.update({f"{i[0]}": 1})
 
-    if len(i) == 1:
-      if i in localizacao:
-        localizacao[f"{i}"] += 1
-      else:
-        localizacao.update({ f"{i}": 0 })
+      elif len(i) == 2:
+        localizacao.update({f"{i[0]}{i[1]}": 1})
+            
     else:
-      t = " ".join(i)
-      if t in localizacao:
-        localizacao[f"{t}"] += 1
-      else:
-        localizacao.update({ f"{t}": 0 })
+      if len(i) == 1:
+        if f"{i[0]}" in localizacao:
+          localizacao[f"{i[0]}"] += 1
+        else:
+          localizacao.update({ f"{i[0]}": 1 })
+
+      if len(i) == 2:
+        if f"{i[0]}{i[1]}" in localizacao:
+          localizacao[f"{i[0]}{i[1]}"] += 1
+        else:
+          localizacao.update({ f"{i[0]}{i[1]}": 1 })
     
 
   return localizacao
